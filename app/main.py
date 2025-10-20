@@ -43,3 +43,7 @@ async def predict_image(file: UploadFile = File(...)):
     pred = child_model.predict(x)
     label = "child" if pred[0][0] > 0.5 else "adult"
     return {"result": label, "confidence": float(pred[0][0])}
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
